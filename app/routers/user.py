@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 
 from .. import models, schemas
 from ..database import SessionLocal, get_db
-from .. import utils
+from .. import utils, ooath2
 
 router = APIRouter(
     prefix='/users',
@@ -14,7 +14,7 @@ router = APIRouter(
 
 
 @router.post('/', status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
-def create_user(user: schemas.UserCreate,  db: SessionLocal = Depends(get_db)):
+def create_user(user: schemas.UserCreate,  db: SessionLocal = Depends(get_db), current_user: int = Depends(ooath2.get_current_user)):
     try:
         user.password = utils.hash(user.password)
         new_user = models.User(**user.dict())
@@ -28,7 +28,7 @@ def create_user(user: schemas.UserCreate,  db: SessionLocal = Depends(get_db)):
 
 
 @router.get('/{id}', status_code=status.HTTP_200_OK, response_model=schemas.UserOut)
-def get_user(id: int, db: SessionLocal = Depends(get_db)):
+def get_user(id: int, db: SessionLocal = Depends(get_db), current_user: int = Depends(ooath2.get_current_user)):
     user = db.query(models.User).filter(models.User.id == id).first()
     if not user:
         raise HTTPException(

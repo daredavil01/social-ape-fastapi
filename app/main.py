@@ -2,7 +2,7 @@ from fastapi import FastAPI, APIRouter
 
 from .models import Base
 from .database import engine
-from .routers import post, user
+from .routers import post, user, auth
 
 Base.metadata.create_all(bind=engine)
 
@@ -14,5 +14,6 @@ def root():
     return {"message": "Hello World !!!"}
 
 
+app.include_router(auth.router)
 app.include_router(post.router)
 app.include_router(user.router)
