@@ -14,7 +14,7 @@ router = APIRouter(
 
 
 @router.post('/', status_code=status.HTTP_201_CREATED, response_model=schemas.UserOut)
-def create_user(user: schemas.UserCreate,  db: SessionLocal = Depends(get_db), current_user: int = Depends(ooath2.get_current_user)):
+def create_user(user: schemas.UserCreate,  db: SessionLocal = Depends(get_db)):
     try:
         user.password = utils.hash(user.password)
         new_user = models.User(**user.dict())
