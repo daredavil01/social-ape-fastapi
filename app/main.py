@@ -6,7 +6,7 @@ from .database import engine
 from .routers import post, user, auth, vote
 
 # Not needed, but nice to have as alembic integrated
-# Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
