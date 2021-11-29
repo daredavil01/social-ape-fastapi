@@ -25,7 +25,7 @@ services:
     image: postgres
     environment:
       - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=social-ape
+      - POSTGRES_DB=fastapi
     volumes:
       - postgres-db:/var/lib/postgresql/data
 
