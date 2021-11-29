@@ -4,6 +4,15 @@ on: [push, pull_request]
 
 jobs:
   job1:
+    env:
+      DATABASE_HOSTNAME: localhost
+      DATABASE_PORT: 5432
+      DATABASE_PASSWORD: 12345
+      DATABASE_NAME: social-ape
+      DATABASE_USERNAME: postgres
+      JWT_SECRET_KEY: 8RcGTiy5QPb5xv5kg2sjR56KKKRFQcbtYN7Ndnniar8DaqZ8XavvZ9Pnkz5z
+      JWT_ALGORITHM: HS256
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: 60
     runs-on: ubuntu-latest
     steps:
       - name: Pulling git repo
