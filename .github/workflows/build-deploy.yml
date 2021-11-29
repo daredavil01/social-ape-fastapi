@@ -4,15 +4,17 @@ on: [push, pull_request]
 
 jobs:
   job1:
+    environment: 
+      name: Testing
     env:
-      DATABASE_HOSTNAME: localhost
-      DATABASE_PORT: 5432
-      DATABASE_PASSWORD: 12345
-      DATABASE_NAME: social-ape
-      DATABASE_USERNAME: postgres
-      JWT_SECRET_KEY: 8RcGTiy5QPb5xv5kg2sjR56KKKRFQcbtYN7Ndnniar8DaqZ8XavvZ9Pnkz5z
-      JWT_ALGORITHM: HS256
-      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      DATABASE_HOSTNAME: ${{DATABASE_HOSTNAME}}
+      DATABASE_PORT: ${{DATABASE_PORT}}
+      DATABASE_PASSWORD: ${{DATABASE_PASSWORD}}
+      DATABASE_NAME: ${{DATABASE_NAME}}
+      DATABASE_USERNAME: ${{DATABASE_USERNAME}}
+      JWT_SECRET_KEY: ${{JWT_SECRET_KEY}}
+      JWT_ALGORITHM: ${{JWT_ALGORITHM}}
+      JWT_ACCESS_TOKEN_EXPIRE_MINUTES: ${{JWT_ACCESS_TOKEN_EXPIRE_MINUTES}}
     runs-on: ubuntu-latest
     steps:
       - name: Pulling git repo
